@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace ProyectoCalendarizacionDeVacaciones.Models;
 
-public partial class TipoContrato
+public partial class Puesto
 {
-    public int Id { get; set; }
+    public int IdPuesto { get; set; }
 
-    public string Tipo { get; set; } = null!;
+    public string NombrePuesto { get; set; } = null!;
+
+    public int Estado { get; set; }
 
     public virtual ICollection<Usuario> Usuario { get; set; } = new List<Usuario>();
 }
