@@ -9,7 +9,7 @@ public partial class Solicitudvacacion
 
     public int IdUsuario { get; set; }
 
-    public DateTime FechaInicioFin { get; set; }
+    public DateOnly FechaInicioFin { get; set; }
 
     public string Estado { get; set; } = null!;
 

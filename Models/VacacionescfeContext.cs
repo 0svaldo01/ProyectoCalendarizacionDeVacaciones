@@ -5,13 +5,13 @@ using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace ProyectoCalendarizacionDeVacaciones.Models;
 
-public partial class ProyectoCfeContext : DbContext
+public partial class VacacionescfeContext : DbContext
 {
-    public ProyectoCfeContext()
+    public VacacionescfeContext()
     {
     }
 
-    public ProyectoCfeContext(DbContextOptions<ProyectoCfeContext> options)
+    public VacacionescfeContext(DbContextOptions<VacacionescfeContext> options)
         : base(options)
     {
     }
@@ -30,7 +30,7 @@ public partial class ProyectoCfeContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=ProyectoCFE", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=vacacionescfe", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -81,7 +81,6 @@ public partial class ProyectoCfeContext : DbContext
                 .HasColumnName("idSolicitudVacacion");
             entity.Property(e => e.Comentarios).HasColumnType("text");
             entity.Property(e => e.Estado).HasMaxLength(45);
-            entity.Property(e => e.FechaInicioFin).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Solicitudvacacion)
                 .HasForeignKey(d => d.IdUsuario)
@@ -97,13 +96,14 @@ public partial class ProyectoCfeContext : DbContext
 
             entity.HasIndex(e => e.IdDepartamento, "FkDepartamento_idx");
 
+            entity.HasIndex(e => e.IdjefeDirecto, "FkJefeDirecto_idx");
+
             entity.HasIndex(e => e.IdPuesto, "FkPuesto_idx");
 
             entity.HasIndex(e => e.IdRol, "FkRol_idx");
 
             entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
-            entity.Property(e => e.FechaDeIngreso).HasColumnType("datetime");
-            entity.Property(e => e.JefeDirecto).HasMaxLength(45);
+            entity.Property(e => e.IdjefeDirecto).HasColumnName("IDJefeDirecto");
             entity.Property(e => e.Nombre).HasMaxLength(200);
             entity.Property(e => e.Password).HasMaxLength(200);
             entity.Property(e => e.RpRt)
@@ -124,6 +124,10 @@ public partial class ProyectoCfeContext : DbContext
                 .HasForeignKey(d => d.IdRol)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FkRol");
+
+            entity.HasOne(d => d.IdjefeDirectoNavigation).WithMany(p => p.InverseIdjefeDirectoNavigation)
+                .HasForeignKey(d => d.IdjefeDirecto)
+                .HasConstraintName("FkJefeDirecto");
         });
 
         modelBuilder.Entity<Vacaciones>(entity =>
@@ -137,7 +141,6 @@ public partial class ProyectoCfeContext : DbContext
             entity.Property(e => e.Idvacacion)
                 .ValueGeneratedNever()
                 .HasColumnName("idvacacion");
-            entity.Property(e => e.Vigencia).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Vacaciones)
                 .HasForeignKey(d => d.IdUsuario)

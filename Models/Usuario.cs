@@ -13,9 +13,9 @@ public partial class Usuario
 
     public string Password { get; set; } = null!;
 
-    public DateTime FechaDeIngreso { get; set; }
+    public DateOnly FechaDeIngreso { get; set; }
 
-    public string JefeDirecto { get; set; } = null!;
+    public int? IdjefeDirecto { get; set; }
 
     public int Estado { get; set; }
 
@@ -30,6 +30,10 @@ public partial class Usuario
     public virtual Puesto IdPuestoNavigation { get; set; } = null!;
 
     public virtual Roles IdRolNavigation { get; set; } = null!;
+
+    public virtual Usuario? IdjefeDirectoNavigation { get; set; }
+
+    public virtual ICollection<Usuario> InverseIdjefeDirectoNavigation { get; set; } = new List<Usuario>();
 
     public virtual ICollection<Solicitudvacacion> Solicitudvacacion { get; set; } = new List<Solicitudvacacion>();
 

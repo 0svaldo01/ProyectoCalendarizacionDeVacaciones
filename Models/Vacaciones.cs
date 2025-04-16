@@ -9,7 +9,7 @@ public partial class Vacaciones
 
     public int Periodos { get; set; }
 
-    public DateTime Vigencia { get; set; }
+    public DateOnly Vigencia { get; set; }
 
     public int IdUsuario { get; set; }
 
