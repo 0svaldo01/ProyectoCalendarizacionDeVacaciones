@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ProyectoCalendarizacionDeVacaciones.Areas.Admin.ViewModels.IndexUsuariosViewModel>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Empleados</title>
+</head>
+<body>
+    <h2>Empleados</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>RPE/RTT</th>
+                <th>Nombre</th>
+                <th>Fecha de Ingreso</th>
+                <th>Departamento</th>
+                <th>Puesto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var em in Model)
+            {
+                <tr>
+                <td>@em.RPE_RTT</td>
+                <td>@em.Nombre</td>
+                <td>@em.FechaDeIngreso</td>
+                <td>@em.IdDepartamento</td>
+                <td>@em.IdPuesto</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+

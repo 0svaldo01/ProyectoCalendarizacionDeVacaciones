@@ -106,9 +106,9 @@ public partial class VacacionescfeContext : DbContext
             entity.Property(e => e.IdjefeDirecto).HasColumnName("IDJefeDirecto");
             entity.Property(e => e.Nombre).HasMaxLength(200);
             entity.Property(e => e.Password).HasMaxLength(200);
-            entity.Property(e => e.RpRt)
+            entity.Property(e => e.RpeRtt)
                 .HasMaxLength(45)
-                .HasColumnName("RP-RT");
+                .HasColumnName("RPE-RTT");
 
             entity.HasOne(d => d.IdDepartamentoNavigation).WithMany(p => p.Usuario)
                 .HasForeignKey(d => d.IdDepartamento)

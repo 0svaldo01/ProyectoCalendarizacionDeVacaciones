@@ -7,7 +7,7 @@ public partial class Usuario
 {
     public int IdUsuario { get; set; }
 
-    public string RpRt { get; set; } = null!;
+    public string RpeRtt { get; set; } = null!;
 
     public string Nombre { get; set; } = null!;
 
