@@ -16,7 +16,14 @@ namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
         public VacacionescfeContext Context { get; }
 
         #region C.R.U.D
-        
+        #region CREATE
+        [HttpGet]
+        public IActionResult Agregar(Puesto p)
+        {
+            return View();
+        }
+
+        #endregion
         #region READ
         public IActionResult Index()
         {

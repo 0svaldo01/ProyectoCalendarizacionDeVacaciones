@@ -1,0 +1,14 @@
+﻿@model IEnumerable<ProyectoCalendarizacionDeVacaciones.Models.Puesto>
+@{
+	Layout = "MainLayout";
+}
+<h2>Puestos</h2>
+
+@foreach (var p in Model)
+{
+	<p>Id:</p>
+	<p>@p.IdPuesto</p>
+	<p>Nombre del puesto:</p>
+}
+
+
