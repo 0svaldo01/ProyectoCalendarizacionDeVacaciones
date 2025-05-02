@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoCalendarizacionDeVacaciones.Models;
 
 namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
 {
@@ -8,5 +9,18 @@ namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
         {
             return View();
         }
+        #region CREATE
+        [HttpGet]
+        public IActionResult Agregar()
+        {
+            return View();
+        }
+        [HttpPost]
+        [HttpGet]
+        public IActionResult Agregar(Puesto p)
+        {
+            return View();
+        }
+        #endregion
     }
 }
