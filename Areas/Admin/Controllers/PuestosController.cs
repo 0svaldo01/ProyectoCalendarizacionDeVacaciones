@@ -8,9 +8,13 @@ namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+
         }
+
         #region CREATE
         [HttpGet]
+
+
         public IActionResult Agregar()
         {
             return View();

@@ -11,9 +11,11 @@ namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
     {
         public UsuariosController(VacacionescfeContext context)
         {
+
             Context = context;
         }
         public VacacionescfeContext Context { get; }
+
 
         #region C.R.U.D
 
