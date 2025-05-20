@@ -19,22 +19,19 @@ namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
 
         #region C.R.U.D
 
-        
-        #region READ
         public IActionResult Index()
         {
-            var data = Context.Usuario.OrderBy(x => x.IdUsuario).Include(x => x.IdDepartamentoNavigation).Include(x => x.IdPuestoNavigation)
-                .Select(e=> new IndexUsuariosViewModel 
-                {
-                    RPE_RTT =e.RpeRtt,
-                    Nombre =e.Nombre,
-                    FechaDeIngreso =e.FechaDeIngreso,
-                    IdDepartamento =e.IdDepartamentoNavigation.NombreDepartamento,
-                    IdPuesto =e.IdPuestoNavigation.NombrePuesto
-                });               
+            var data = Context.Usuario
+                .OrderBy(u => u.Nombre)
+                .Include(u => u.IdDepartamentoNavigation)
+                .Include(u => u.IdPuestoNavigation)
+                .Include(u => u.IdRolNavigation).Where(u => u.Estado == 0).ToList();
+
+
+
             return View(data);
         }
-        #endregion
+
         #endregion
     }
 }

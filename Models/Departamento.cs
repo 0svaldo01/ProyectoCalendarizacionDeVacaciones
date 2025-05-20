@@ -9,5 +9,7 @@ public partial class Departamento
 
     public string? NombreDepartamento { get; set; }
 
+    public int Estado { get; set; }
+
     public virtual ICollection<Usuario> Usuario { get; set; } = new List<Usuario>();
 }

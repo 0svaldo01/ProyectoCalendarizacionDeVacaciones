@@ -1,0 +1,20 @@
+﻿@model ProyectoCalendarizacionDeVacaciones.Models.Puesto
+@{
+    Layout = "AdminLayout";
+}
+<div class="container">
+    <h1>Editar Puesto</h1>
+
+    <form method="post" action="~/Admin/Puestos/Editar">
+        <input type="hidden" name="IdPuesto"  value="@Model.IdPuesto"/>
+        <label for="nombre">Nombre del Puesto:</label>
+        <input type="text" id="nombre" name="NombrePuesto" value="@Model.NombrePuesto" required style="width:100%;padding:8px;margin-top:5px;border:1px solid #ccc;border-radius:4px;">
+
+        <button type="submit" class="btn">Guardar</button>
+        <a href="~/Admin/Puestos/Index"></a>
+
+        <div style="color:red;">
+            @Html.ValidationSummary()
+        </div>
+    </form>
+</div>

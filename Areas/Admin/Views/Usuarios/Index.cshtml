@@ -1,29 +1,40 @@
-﻿@model IEnumerable<ProyectoCalendarizacionDeVacaciones.Areas.Admin.ViewModels.IndexUsuariosViewModel>
+﻿@model IEnumerable<ProyectoCalendarizacionDeVacaciones.Models.Usuario>
+@{
+    Layout = "AdminLayout";
+}
 
-    <h2>Empleados</h2>
-
-    <table border="1">
+<div class="container mt-4">
+    <h2>Lista de Usuarios</h2>
+    <a href="~/Admin/Usuarios/Agregar" class="btn btn-success mb-3">Agregar Usuario</a>
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>RPE/RTT</th>
+                <th>RP/RT</th>
                 <th>Nombre</th>
-                <th>Fecha de Ingreso</th>
                 <th>Departamento</th>
                 <th>Puesto</th>
+                <th>Rol</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var em in Model)
+            @foreach (var u in Model)
             {
                 <tr>
-                <td>@em.RPE_RTT</td>
-                <td>@em.Nombre</td>
-                <td>@em.FechaDeIngreso</td>
-                <td>@em.IdDepartamento</td>
-                <td>@em.IdPuesto</td>
-            </tr>
+                    <td>@u.RpRt</td>
+                    <td>@u.Nombre</td>
+                    <td>@u.IdDepartamentoNavigation.NombreDepartamento</td>
+                    <td>@u.IdPuestoNavigation.NombrePuesto</td>
+                    <td>@u.IdRolNavigation.NombreRol</td>            
+                    <td>
+                        <a href="~/Admin/Usuarios/Editar/@u.IdUsuario" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="~/Admin/Usuarios/Eliminar/@u.IdUsuario" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
+</div>
+
 
 

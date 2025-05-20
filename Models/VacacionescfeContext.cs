@@ -30,7 +30,7 @@ public partial class VacacionescfeContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=vacacionescfe", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=vacacionescfe", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -76,9 +76,7 @@ public partial class VacacionescfeContext : DbContext
 
             entity.HasIndex(e => e.IdUsuario, "FkUsuariov_idx");
 
-            entity.Property(e => e.IdSolicitudVacacion)
-                .ValueGeneratedNever()
-                .HasColumnName("idSolicitudVacacion");
+            entity.Property(e => e.IdSolicitudVacacion).HasColumnName("idSolicitudVacacion");
             entity.Property(e => e.Comentarios).HasColumnType("text");
             entity.Property(e => e.Estado).HasMaxLength(45);
 
@@ -106,9 +104,9 @@ public partial class VacacionescfeContext : DbContext
             entity.Property(e => e.IdjefeDirecto).HasColumnName("IDJefeDirecto");
             entity.Property(e => e.Nombre).HasMaxLength(200);
             entity.Property(e => e.Password).HasMaxLength(200);
-            entity.Property(e => e.RpeRtt)
+            entity.Property(e => e.RpRt)
                 .HasMaxLength(45)
-                .HasColumnName("RPE-RTT");
+                .HasColumnName("RP-RT");
 
             entity.HasOne(d => d.IdDepartamentoNavigation).WithMany(p => p.Usuario)
                 .HasForeignKey(d => d.IdDepartamento)
@@ -138,9 +136,7 @@ public partial class VacacionescfeContext : DbContext
 
             entity.HasIndex(e => e.IdUsuario, "FkUsuario_idx");
 
-            entity.Property(e => e.Idvacacion)
-                .ValueGeneratedNever()
-                .HasColumnName("idvacacion");
+            entity.Property(e => e.Idvacacion).HasColumnName("idvacacion");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Vacaciones)
                 .HasForeignKey(d => d.IdUsuario)

@@ -1,14 +1,32 @@
 ﻿@model IEnumerable<ProyectoCalendarizacionDeVacaciones.Models.Puesto>
 @{
-	Layout = "MainLayout";
+    Layout = "AdminLayout";
 }
-<h2>Puestos</h2>
+    <div class="container">
+        <h1>Puestos</h1>
+    <a href="~/Admin/Puestos/Agregar" class="btn">Agregar Puesto</a>
 
-@foreach (var p in Model)
-{
-	<p>Id:</p>
-	<p>@p.IdPuesto</p>
-	<p>Nombre del puesto:</p>
-}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
 
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <input type="hidden" value="@p.IdPuesto"/>
+                    <td>@p.NombrePuesto</td>
+                    <td>
+                        <a href="~/Admin/Puestos/Editar/@p.IdPuesto" class="btn">Editar</a>
+                        <a href="~/Admin/Puestos/Eliminar/@p.IdPuesto" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 

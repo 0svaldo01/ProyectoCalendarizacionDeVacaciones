@@ -9,5 +9,7 @@ public partial class Puesto
 
     public string NombrePuesto { get; set; } = null!;
 
+    public int Estado { get; set; }
+
     public virtual ICollection<Usuario> Usuario { get; set; } = new List<Usuario>();
 }
