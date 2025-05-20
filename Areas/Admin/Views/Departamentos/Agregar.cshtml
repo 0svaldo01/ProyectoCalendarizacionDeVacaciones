@@ -1,0 +1,15 @@
+﻿@model ProyectoCalendarizacionDeVacaciones.Models.Departamento
+@{
+	Layout = "AdminLayout";
+}
+<h2>Agregar Departamentos</h2>
+<form method="post" action="~/Admin/Departamentos/Agregar">
+	<p>Nombre del departamento:</p><br />
+	<input type="text" /><br />
+	<input type="submit" value="Guardar"/>
+	<a href="~/Admin/Departamentos/Index">Cancelar</a>
+
+	<h3 style="color:red;" id="error">
+		@Html.ValidationSummary()
+	</h3>
+</form>

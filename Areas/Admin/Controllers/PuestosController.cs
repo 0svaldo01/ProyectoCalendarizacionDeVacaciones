@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProyectoCalendarizacionDeVacaciones.Models;
 
 namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
@@ -23,8 +24,12 @@ namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Agregar()
         {
-            var puesto = new Puesto();
-            return View(puesto);
+            ViewData["Departamentos"] = new SelectList(Context.Departamento, "IdDepartamento", "Nombre");
+            ViewData["Puestos"] = new SelectList(Context.Puesto.Where(p => p.Estado == 0), "IdPuesto", "NombrePuesto");
+            ViewData["Roles"] = new SelectList(Context.Roles, "IdRol", "NombreRol");
+            ViewData["Jefes"] = new SelectList(Context.Usuario.Where(u => u.Estado == 0), "IdUsuario", "Nombre");
+
+            return View(new Usuario());
         }
         [HttpPost]
         public IActionResult Agregar(Puesto p)

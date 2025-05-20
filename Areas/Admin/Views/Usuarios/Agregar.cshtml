@@ -1,0 +1,74 @@
+﻿@model ProyectoCalendarizacionDeVacaciones.Areas.Admin.ViewModels.AgregarUsuarioViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "AdminLayout";
+}
+
+
+<div class="container mt-4">
+    <h2>Agregar Usuario</h2>
+    <form method="post" action="~/Admin/Usuarios/Agregar">
+        <div class="mb-3">
+            <label>RP/RT</label>
+            <input asp-for="Usuario.RpRt"  />
+        </div>
+        <div class="mb-3">
+            <label>Nombre</label>
+            <input asp-for="Usuario.Nombre" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Contraseña</label>
+            <input asp-for="Usuario.Password" class="form-control" type="password" />
+        </div>
+        <div class="mb-3">
+            <label>Fecha de ingreso</label>
+            <input asp-for="Usuario.FechaDeIngreso" type="date" id="fecha" />
+        </div>
+        <div>
+            <label>Departamento</label><br />
+            <select asp-for="Usuario.IdDepartamento"
+                    asp-items="@(new SelectList(Model.ListaDepartamentos,"IdDepartamento","NombreDepartamento"))">
+                <option selected="selected">-- Seleccionar departamento --</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Puesto</label><br />
+            <select asp-for="Usuario.IdPuesto"
+                    asp-items="@(new SelectList(Model.ListaPuestos,"IdPuesto","NombrePuesto"))">
+                <option selected="selected">-- Seleccionar puesto --</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Rol</label><br />
+            <select asp-for="Usuario.IdRol"
+                    asp-items="@(new SelectList(Model.ListaRoles,"IdRol","NombreRol"))">
+                <option selected="selected" value="null">-- Selecciona un rol --</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Jefe Directo</label><br />
+            <select asp-for="Usuario.IdjefeDirecto"
+                 asp-items="@(new SelectList(Model.ListaJefesDepartamento,"IdUsuario","Nombre"))">
+                <option selected="selected" value="">-- Sin Jefe directo --</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="~/Admin/Usuarios/Index" class="btn btn-secondary">Cancelar</a>
+        <div style="color:red;">
+            @Html.ValidationSummary()
+        </div>
+    </form>
+</div>
+<!--
+<script>
+    const hoy = new Date();
+    const dia = String(hoy.getDate()).padStart(2, '0');
+    const mes = String(hoy.getMonth() + 1).padStart(2, '0'); 
+    const anio = hoy.getFullYear();
+
+    const fechaHoy = `${dia}-${mes}-${anio}`;
+
+    document.getElementById('fecha').placeholder = fechaHoy;
+    console.log(fechaHoy);
+</script>
+-->

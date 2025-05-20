@@ -30,7 +30,7 @@ public partial class VacacionescfeContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=vacacionescfe", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=vacacionescfe", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -65,6 +65,7 @@ public partial class VacacionescfeContext : DbContext
             entity.ToTable("roles");
 
             entity.Property(e => e.IdRol).HasColumnName("idRol");
+            entity.Property(e => e.Estado).HasDefaultValueSql("'0'");
             entity.Property(e => e.NombreRol).HasMaxLength(45);
         });
 
