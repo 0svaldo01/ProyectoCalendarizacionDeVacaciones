@@ -1,4 +1,4 @@
-﻿@model ProyectoCalendarizacionDeVacaciones.Models.Solicitudvacacion
+﻿@model ProyectoCalendarizacionDeVacaciones.ViewModels.ProgramarVacacionesViewModel
 @{
 	Layout = "MainLayout";	
 }
@@ -13,7 +13,7 @@
             <label for="fechaFin">Fecha de fin:</label>
             <input type="date" id="fechaFin" name="FechaFin" value="@Model.FechaFin" required>
             <input type="hidden" name="Estado" value="@Model.Estado" />
-
+            <input type="hidden" name="Antig"/> 
             <label for="comentarios">Comentarios:</label>
             <textarea id="comentarios" name="Comentarios" rows="4" placeholder="Opcional...">@Model.Comentarios</textarea>
 
