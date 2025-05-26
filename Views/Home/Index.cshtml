@@ -1,5 +1,81 @@
 ﻿@model ProyectoCalendarizacionDeVacaciones.ViewModels.IndexViewModel
 @{
-	Layout = "MainLayout";
+    Layout = "MainLayout";
 }
-Bienvenido 
+
+<form>
+    <h3>
+        Datos del usuario</h2>
+
+
+        <table class="tabla1">
+            <tr>
+                <th>
+                    RP/RT
+                </th>
+
+                <td>
+                    @Model.RPE_RTT
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+
+                <td>
+                    @Model.Nombre
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    ANTIGUEDAD:
+                </th>
+
+                <td>
+                    @Model.Antig años(s)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    JEFE DIRECTO
+                </th>
+
+                <td>
+                    @Model.NombreJefe
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Fecha de ingreso
+                </th>
+
+                <td>
+                   @Model.FechaDeIngreso
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Puesto
+                </th>
+
+                <td>
+                    @Model.NombrePuesto 
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    DEPARTAMENTO
+                </th>
+
+                <td>
+                    @Model.NombreDepartamento
+                </td>
+            </tr>
+
+        </table>
+        <div class="input-group">
+        </div>
+
+</form>

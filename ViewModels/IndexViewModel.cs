@@ -1,4 +1,6 @@
-﻿namespace ProyectoCalendarizacionDeVacaciones.ViewModels
+﻿using ProyectoCalendarizacionDeVacaciones.Models;
+
+namespace ProyectoCalendarizacionDeVacaciones.ViewModels
 {
     public class IndexViewModel
     {
@@ -7,8 +9,10 @@
         public string RPE_RTT { get; set; }
 
         public DateOnly FechaDeIngreso { get; set; }
+        public int Antig { get; set; }
 
-        public string IdDepartamento { get; set; }
-        public string IdPuesto { get; set; }
+        public string NombreDepartamento { get; set; }
+        public string NombrePuesto { get; set; }
+        public string NombreJefe { get; set; }
     }
 }

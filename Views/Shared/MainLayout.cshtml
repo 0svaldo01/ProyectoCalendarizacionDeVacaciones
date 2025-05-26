@@ -1,13 +1,51 @@
-﻿<!DOCTYPE html>
-<html lang="es">
+﻿
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Calendarizacion de periodos vacacionales</title>
-    <link rel="stylesheet" href="~/css/styles.css" />
+	<meta charset="UTF-8">
+	<title>Calerandarizacion de vacaciones CFE</title>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+	<link rel="stylesheet" href="~/css/Estilos.css">
 
 </head>
 <body>
-    <div class="navbar"><a href="~/Home/Index">CFE</a></div>
-    @RenderBody()
+
+	<div id="conteiner">
+		<header id="head-user">
+			<h3>Programa de Vacaciones</h3>
+			<a href="~/Home/Index"><img class="im-av" src="~/R.png"></a>
+		</header>
+		<div id="nav-bar">
+			<input id="nav-toggle" type="checkbox" />
+			<div id="nav-header">
+				<a id="nav-title" href="ListaVac.html" target="_blank"></i>Programa de Vacaciones</a>
+				<label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+				<hr />
+			</div>
+			<div id="nav-content">
+				<div class="nav-button"><i class="fas fa-clipboard-list"></i> <a href="~/Home/PeriodosDisp"><span>Periodos Disp.</span></a> </div>
+				<div class="nav-button"><i class="far fa-clipboard"></i><a href="~/Home/ProgramarVacaciones"><span>Solicitar vacaciones</span></a></div>
+				<div class="nav-button"><i class="fas fa-paper-plane"></i><span>Solicitudes enviadas</span></div>
+				<div class="nav-button"><i class="fas fa-address-book"></i><span href="~/Home/Index">Datos de usuario</span></div>
+				<hr />
+				<div id="nav-content-highlight"></div>
+			</div>
+			<input id="nav-footer-toggle" type="checkbox" />
+			<div id="nav-footer">
+				<div id="nav-footer-heading">
+					<div id="nav-footer-avatar"><img class="im-av" src="~/R.png" /></div>
+					<div id="nav-footer-titlebox"><a id="nav-footer-title" href="~/Home/Index" target="_blank">@User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value</a><span id="nav-footer-subtitle">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</span></div>
+					<label for="nav-footer-toggle"><i class="fas fa-caret-up"></i></label>
+				</div>
+				<div id="nav-footer-content">
+					<a href="~/Account/Logout"> Cerrar sesión<span class="fas fa-share-square"></span></a>
+				</div>
+			</div>
+		</div>
+
+		@RenderBody()
+
+	</div>
+
 </body>
 </html>

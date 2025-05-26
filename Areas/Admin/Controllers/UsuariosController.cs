@@ -35,7 +35,7 @@ namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
 
             vm.ListaDepartamentos = Context.Departamento.OrderBy(x => x.NombreDepartamento).Where(x=>x.Estado ==0);
             vm.ListaPuestos = Context.Puesto.OrderBy(x => x.NombrePuesto).Where(x => x.Estado == 0);
-            vm.ListaRoles = Context.Roles.OrderBy(x => x.NombreRol).Where(x => x.Estado == 0);
+            vm.ListaRoles = Context.Roles.OrderBy(x => x.NombreRol);
             vm.ListaJefesDepartamento = Context.Usuario.Where(x => x.IdRol == 2).Where(x => x.Estado == 0);
 
             return View(vm);
@@ -76,7 +76,7 @@ namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
             }
             u.ListaDepartamentos = Context.Departamento.OrderBy(x => x.NombreDepartamento).Where(x => x.Estado == 0);
             u.ListaPuestos = Context.Puesto.OrderBy(x => x.NombrePuesto).Where(x => x.Estado == 0);
-            u.ListaRoles = Context.Roles.OrderBy(x => x.NombreRol).Where(x => x.Estado == 0);
+            u.ListaRoles = Context.Roles.OrderBy(x => x.NombreRol);
             u.ListaJefesDepartamento = Context.Usuario.Where(x => x.IdRol == 2).Where(x => x.Estado == 0);
 
             return View(u);

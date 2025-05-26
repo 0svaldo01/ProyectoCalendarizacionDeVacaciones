@@ -1,9 +1,16 @@
 ﻿using ProyectoCalendarizacionDeVacaciones.ViewModels;
 using ProyectoCalendarizacionDeVacaciones.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ProyectoCalendarizacionDeVacaciones.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public HomeController(VacacionescfeContext context)
@@ -12,11 +19,116 @@ namespace ProyectoCalendarizacionDeVacaciones.Controllers
         }
 
         public VacacionescfeContext Context { get; }
-
         public IActionResult Index()
         {
-            
-            return View();
-        }
+			// Obtener el Id del usuario logueado desde las claims
+			var idClaim = User.FindFirst("IdUsuario")?.Value;
+
+			if (int.TryParse(idClaim, out int idUsuario))
+			{
+				// Cargar el usuario desde la base de datos con las relaciones
+				var usuario = Context.Usuario
+					.Include(u => u.IdDepartamentoNavigation)
+					.Include(u => u.IdPuestoNavigation)
+					.Include(u => u.IdjefeDirectoNavigation)
+					.FirstOrDefault(u => u.IdUsuario == idUsuario);
+
+				if (usuario == null)
+				{
+					return RedirectToAction("Login", "Login");
+				}
+
+				if (usuario != null)
+				{
+					// Calcular la antigüedad
+					var antig = DateTime.Today.Year - usuario.FechaDeIngreso.Year;
+
+
+					// Llenar el ViewModel
+					var vm = new IndexViewModel
+					{
+						Id = usuario.IdUsuario,
+						Nombre = usuario.Nombre,
+						RPE_RTT = usuario.RpRt,
+						FechaDeIngreso = usuario.FechaDeIngreso,
+						Antig = antig,
+						NombreDepartamento = usuario.IdDepartamentoNavigation?.NombreDepartamento ?? "No disponible",
+						NombrePuesto = usuario.IdPuestoNavigation?.NombrePuesto ?? "No disponible",
+						NombreJefe = usuario.IdjefeDirectoNavigation?.Nombre ?? "No disponible"
+					};
+
+
+                    return View(vm);
+					
+				}
+			}
+
+			return RedirectToAction("Login", "Login");
+		}
+
+		public IActionResult PeriodosDisp()
+		{
+			var idClaim = User.FindFirst("IdUsuario")?.Value;
+
+			if (int.TryParse(idClaim, out int idUsuario))
+			{
+
+				var usuario = Context.Vacaciones.OrderBy(x=>x.Vigencia).Include(x=>x.IdUsuarioNavigation).Where(u => u.IdUsuario == idUsuario);
+				return View(usuario);
+			}
+			return RedirectToAction("Login", "Login");
+		}
+		public IActionResult ProgramarVacaciones()
+		{
+			var vac = new Solicitudvacacion();
+			return View(vac);
+		}
+		[HttpPost]
+		public IActionResult ProgramarVacaciones(Solicitudvacacion v)
+		{
+
+
+
+            var exs = Context.Vacaciones.Any(x => x.Idvacacion == v.IdSolicitudVacacion);
+
+            if (v.FechaInicio >= v.FechaFin)
+            {
+                ModelState.AddModelError("", "La fecha de inicio debe ser menor a la fecha de fin.");
+                return View(v);
+            }
+            if (exs)
+            {
+                ModelState.AddModelError("", "Ya existe una solicitud de vacaciones con ese ID.");
+                return View(v);
+            }
+
+            var solapamiento = Context.Solicitudvacacion.Any(x =>
+       x.IdUsuario == v.IdUsuario &&
+       (
+           (v.FechaInicio >= x.FechaInicio && v.FechaInicio <= x.FechaFin) ||
+           (v.FechaFin >= x.FechaInicio && v.FechaFin <= x.FechaFin) ||
+           (v.FechaInicio <= x.FechaInicio && v.FechaFin >= x.FechaFin)
+       ));
+
+			if (solapamiento)
+			{
+				ModelState.AddModelError("", "Ya tienes vacaciones registradas en ese rango de fechas.");
+				return View(v);
+			}
+                if (ModelState.IsValid)
+			{
+                var idClaim = User.FindFirst("IdUsuario")?.Value;
+
+                v.IdUsuario = Context.Usuario.FirstOrDefault(x => x.IdUsuario ==idUsuario);
+
+                v.Estado = 0;
+				Context.Add(v);
+				Context.SaveChanges();
+				return Redirect("~/Home/Index");
+			}
+
+			return View(v);
+		}
+
     }
 }

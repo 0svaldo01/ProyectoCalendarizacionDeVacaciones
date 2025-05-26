@@ -1,0 +1,91 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión - Programa de Vacaciones</title>
+    <link rel="stylesheet" href="~/css/Estilos.css" />
+    <style>
+        body {
+            background-color: var(--background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+            .login-container h2 {
+                color: var(--navbar-dark-primary);
+                margin-bottom: 30px;
+            }
+
+            .login-container input[type="text"],
+            .login-container input[type="password"] {
+                width: 50%;
+                padding: 12px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                font-family: inherit;
+            }
+
+            .login-container button {
+                background-color: var(--navbar-dark-primary);
+                color: white;
+                padding: 12px;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+                .login-container button:hover {
+                    background-color: #1a4e3b;
+                }
+
+        .login-footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--navbar-light-secondary);
+        }
+
+            .login-footer a {
+                color: var(--navbar-dark-primary);
+                text-decoration: none;
+            }
+
+                .login-footer a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form method="post" action="~/Account/Login">
+            <p>RP/RT:</p><br />
+            <input type="text" name="rprt" placeholder="Ingrese su RP/RT" required /><br />
+            <p>Contraseña:</p><br />
+            <input type="password" name="password" placeholder="Ingrese su Contraseña" required />
+            <button type="submit">Entrar</button>
+
+                <p style="color:red;" id="error">
+                    @Html.ValidationSummary()
+                </p>
+
+        </form>
+    </div>
+</body>
+</html>
