@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ProyectoCalendarizacionDeVacaciones.Models.Solicitudvacacion>
+@{
+	Layout = "MainLayout";
+}
+<form>
+    <h3>
+        Solicitudes enviadas</h2>
+
+
+
+        <div class="input-group">
+            <table class="tabla1">
+                <tr>
+
+                    <th>N°</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Periodo</th>
+                    <th> Estatus</th>
+
+                </tr>
+                @foreach(var v in Model)
+                {
+                <tr>
+                    <td>
+                        1
+                    </td>
+
+                    <td>
+                        @v.FechaInicio
+                    </td>
+
+                    <td>
+                        @v.FechaFin
+                    </td>
+
+                    <td>
+                        1
+                    </td>
+
+                    <td>
+                        @v.Estado 
+                    </td>
+
+                </tr>}
+
+
+
+            </table>
+
+        </div>
+
+</form>

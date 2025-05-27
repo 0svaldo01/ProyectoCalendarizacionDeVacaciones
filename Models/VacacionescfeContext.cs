@@ -78,9 +78,6 @@ public partial class VacacionescfeContext : DbContext
 
             entity.Property(e => e.IdSolicitudVacacion).HasColumnName("idSolicitudVacacion");
             entity.Property(e => e.Comentarios).HasColumnType("text");
-            entity.Property(e => e.Estado)
-                .HasMaxLength(45)
-                .HasDefaultValueSql("'0'");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Solicitudvacacion)
                 .HasForeignKey(d => d.IdUsuario)

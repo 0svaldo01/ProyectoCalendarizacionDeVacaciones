@@ -1,30 +1,30 @@
-﻿@model ProyectoCalendarizacionDeVacaciones.ViewModels.ProgramarVacacionesViewModel
+﻿@model ProyectoCalendarizacionDeVacaciones.Models.Solicitudvacacion
 @{
 	Layout = "MainLayout";	
 }
 <form method="post" action="~/Home/ProgramarVacaciones">
 
-    <h3>
-        Solicitud de Vacaciones</h2>
+    <form>
 
-        <div class="input-group">
-            <label for="fechaInicio">Fecha de inicio:</label>
-            <input type="date" id="fechaInicio" name="FechaInicio" value="@Model.FechaInicio" required>
-            <label for="fechaFin">Fecha de fin:</label>
-            <input type="date" id="fechaFin" name="FechaFin" value="@Model.FechaFin" required>
-            <input type="hidden" name="Estado" value="@Model.Estado" />
-            <input type="hidden" name="Antig"/> 
-            <label for="comentarios">Comentarios:</label>
-            <textarea id="comentarios" name="Comentarios" rows="4" placeholder="Opcional...">@Model.Comentarios</textarea>
+        <h3>
+            Solicitud de Vacaciones</h2>
 
+            <div class="input-group">
+                <label for="fechaInicio">Fecha de inicio:</label>
+                <input type="date" id="fechaInicio" name="FechaInicio" >
+                <label for="fechaFin">Fecha de fin:</label>
+                <input type="date" id="fechaFin" name="FechaFin" >
+                <label for="comentarios">Comentarios:</label>
+                <textarea id="comentarios" name="Comentarios" rows="4" placeholder="Opcional..."></textarea>
+                <button class="btnS" type="submit" value="Enviar">Enviar solicitud</button>
 
-            <button class="btnS" type="submit" value="Enviar">Enviar solicitud</button>
-
-            <p>Nota: Ustede puede dividir sus vacaciones en  2, 3 y maxímo 4 periodos. Y si lo prefiere, tomar todas sus vacaciones en uno solo.</p>
+                <p>Nota: Ustede puede dividir sus vacaciones en  2, 3 y maxímo 4 periodos. Y si lo prefiere, tomar todas sus vacaciones en uno solo.</p>
+            </div>
 
             <p style="color:red;" id="error">
                 @Html.ValidationSummary()
             </p>
+    </form>
 
         </div>
 

@@ -13,7 +13,7 @@ public partial class Solicitudvacacion
 
     public DateOnly FechaFin { get; set; }
 
-    public string Estado { get; set; } = null!;
+    public int Estado { get; set; }
 
     public string? Comentarios { get; set; }
 
