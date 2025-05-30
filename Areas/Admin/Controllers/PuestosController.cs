@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProyectoCalendarizacionDeVacaciones.Models;
 
 namespace ProyectoCalendarizacionDeVacaciones.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class PuestosController : Controller
     {
         public VacacionescfeContext Context { get; }

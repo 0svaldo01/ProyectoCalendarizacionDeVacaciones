@@ -18,23 +18,41 @@
 		<div id="nav-bar">
 			<input id="nav-toggle" type="checkbox" />
 			<div id="nav-header">
-				<a id="nav-title" href="~/Home/PeriodosDisp" target="_blank"></i>Programa de Vacaciones</a>
+				<a id="nav-title" href="~/Home/PeriodosDisp"></i>Programa de Vacaciones</a>
 				<label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
 				<hr />
 			</div>
 			<div id="nav-content">
-				<div class="nav-button"><i class="fas fa-clipboard-list"></i> <a href="~/Home/PeriodosDisp"><span>Periodos Disp.</span></a> </div>
-				<div class="nav-button"><i class="far fa-clipboard"></i><a href="~/Home/ProgramarVacaciones"><span>Solicitar vacaciones</span></a></div>
-				<div class="nav-button"><i class="fas fa-paper-plane"></i><a href="~/Home/SolicitudesEnviadas"><span>Solicitudes enviadas</span></a></div>
-				<div class="nav-button"><i class="fas fa-address-book"></i><span href="~/Home/Index">Datos de usuario</span></div>
-				<hr />
+
+				if(@User.IsInRole(""))
+				{
+				<div class="nav-button"><i class="fas fa-clipboard-list"></i><a href="~/Admin/Home/Usuarios"><span>Lista de empleados</span></a> </div>
+				<div class="nav-button"><i class="far fa-clipboard"></i> <a href="~/Admin/Home/Aprobar"><span>Solicitudes por revisar</span></a></div>
+				}
+				@if (User.IsInRole("Jefe de departamento"))
+				{
+					<div class="nav-button"><i class="fas fa-clipboard-list"></i><a href="~/Home/ListaEmpleados"><span>Lista de empleados</span></a> </div>
+					<div class="nav-button"><i class="far fa-clipboard"></i> <a href="~/Home/Aprobar"><span>Solicitudes por revisar</span></a></div>
+					<div class="nav-button"><i class="fas fa-clipboard-list"></i> <a href="~/Home/PeriodosDisp"><span>Periodos Disp.</span></a> </div>
+					<div class="nav-button"><i class="far fa-clipboard"></i><a href="~/Home/ProgramarVacaciones"><span>Solicitar vacaciones</span></a></div>
+					<div class="nav-button"><i class="fas fa-paper-plane"></i><a href="~/Home/SolicitudesEnviadas"><span>Solicitudes enviadas</span></a></div>
+					<div class="nav-button"><i class="fas fa-address-book"></i><a href="~/Home/Index"><span>Datos de usuario</span></a></div>
+				}
+				@if (User.IsInRole("Empleado"))
+				{
+					<div class="nav-button"><i class="fas fa-clipboard-list"></i> <a href="~/Home/PeriodosDisp"><span>Periodos Disp.</span></a> </div>
+					<div class="nav-button"><i class="far fa-clipboard"></i><a href="~/Home/ProgramarVacaciones"><span>Solicitar vacaciones</span></a></div>
+					<div class="nav-button"><i class="fas fa-paper-plane"></i><a href="~/Home/SolicitudesEnviadas"><span>Solicitudes enviadas</span></a></div>
+					<div class="nav-button"><i class="fas fa-address-book"></i><a href="~/Home/Index"><span>Datos de usuario</span></a></div>
+					<hr />
+				}
 				<div id="nav-content-highlight"></div>
 			</div>
 			<input id="nav-footer-toggle" type="checkbox" />
 			<div id="nav-footer">
 				<div id="nav-footer-heading">
 					<div id="nav-footer-avatar"><img class="im-av" src="~/R.png" /></div>
-					<div id="nav-footer-titlebox"><a id="nav-footer-title" href="~/Home/Index" target="_blank">@User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value</a><span id="nav-footer-subtitle">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</span></div>
+					<div id="nav-footer-titlebox"><a id="nav-footer-title" href="~/Home/Index" >@User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value</a><span id="nav-footer-subtitle">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</span></div>
 					<label for="nav-footer-toggle"><i class="fas fa-caret-up"></i></label>
 				</div>
 				<div id="nav-footer-content">

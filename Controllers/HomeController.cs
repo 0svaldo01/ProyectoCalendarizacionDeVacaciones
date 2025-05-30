@@ -185,5 +185,10 @@ namespace ProyectoCalendarizacionDeVacaciones.Controllers
 			return RedirectToAction("Login", "Login");
 		}
 
+		public IActionResult ListaEmpleados()
+		{
+			return View();
+		}
+
 	}
 }
